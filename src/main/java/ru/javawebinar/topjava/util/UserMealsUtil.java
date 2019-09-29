@@ -3,11 +3,13 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -20,12 +22,26 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
         );
         getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000);
-//        .toLocalDate();
-//        .toLocalTime();
+
     }
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with correctly exceeded field
-        return null;
+        List<UserMealWithExceed> userMealWithExceedList = new ArrayList<UserMealWithExceed>();
+        Map<LocalDate, Integer> daysAndCalories = new HashMap<>();
+        for (UserMeal userMeal : mealList) {
+            daysAndCalories.merge(userMeal.getDateTime().toLocalDate(), (int) userMeal.getCalories(), Integer::sum);
+        }
+        for (UserMeal srtUserMeal : mealList
+             ) {
+            LocalDate date = srtUserMeal.getDateTime().toLocalDate();
+            boolean exceed = false;
+            if (daysAndCalories.get(date) != null)
+                if (daysAndCalories.get(date) > caloriesPerDay) {
+                    exceed = true;
+                }
+            userMealWithExceedList.add(new UserMealWithExceed(srtUserMeal.getDateTime(),srtUserMeal.getDescription(),srtUserMeal.getCalories(),exceed));
+            }
+        List<UserMealWithExceed> userMealWithExceedListFiltered = userMealWithExceedList.stream().filter(x-> TimeUtil.isBetween(x.getDateTime().toLocalTime(), startTime, endTime)).collect(Collectors.toList());
+        return userMealWithExceedListFiltered;
     }
 }
