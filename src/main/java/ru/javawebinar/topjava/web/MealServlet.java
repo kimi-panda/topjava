@@ -17,14 +17,15 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
+    List<Meal> listMeal = MealsUtil.createListMeal();
+    List<MealTo> listMealTo = MealsUtil.getFiltered(listMeal, LocalTime.MIN, LocalTime.MAX, 2000);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("redirect to meals");
 
-        List<Meal> listMeal = MealsUtil.CreateListMeal();
-        List<MealTo> listMealTo = MealsUtil.getFiltered(listMeal, LocalTime.of(0, 0),LocalTime.of(23, 59),2000);
-        request.setAttribute("meals", listMealTo);
+        request.setAttribute("listMealTo", listMealTo);
+
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
 
