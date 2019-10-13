@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.repository;
 import ru.javawebinar.topjava.model.Meal;
 
 import java.util.Collection;
+import java.util.function.Predicate;
 
 public interface MealRepository {
     // null if not found, when updated
@@ -15,4 +16,6 @@ public interface MealRepository {
     Meal get(int id);
 
     Collection<Meal> getAll();
+
+    Collection<Meal> getFiltered(Predicate<Meal> filter);
 }

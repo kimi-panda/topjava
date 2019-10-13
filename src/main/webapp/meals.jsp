@@ -20,7 +20,20 @@
 <section>
     <h3><a href="index.html">Home</a></h3>
     <hr/>
-    <h2>Meals</h2>
+    <h3 style="margin-top: 50px">Моя еда:</h3>
+    <dl>
+        <dt>От даты:</dt>
+        <dd><input type="date" id="startDate" name="startDate"></dd>
+        <dt>До даты:</dt>
+        <dd><input type="date" id="endDate" name="endDate"></dd>
+        <dt>От времени:</dt>
+        <dd><input type="time" id="startTime" name="startTime"></dd>
+        <dt>До времени:</dt>
+        <dd><input type="time" id="endTime" name="endTime"></dd>
+    </dl>
+    <a href="meals?action=filter">Отфильтровать</a>
+    <a href="meals?action=clearFilter">Отменить</a>
+    <hr/>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
@@ -34,7 +47,7 @@
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
             <tr class="${meal.excess ? 'excess' : 'normal'}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
