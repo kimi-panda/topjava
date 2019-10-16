@@ -21,18 +21,20 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h3 style="margin-top: 50px">Моя еда:</h3>
+    <form method="get" action="meals" >
     <dl>
         <dt>От даты:</dt>
-        <dd><input type="date" id="startDate" name="startDate"></dd>
+        <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
         <dt>До даты:</dt>
-        <dd><input type="date" id="endDate" name="endDate"></dd>
+        <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
         <dt>От времени:</dt>
-        <dd><input type="time" id="startTime" name="startTime"></dd>
+        <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
         <dt>До времени:</dt>
-        <dd><input type="time" id="endTime" name="endTime"></dd>
+        <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
     </dl>
-    <a href="meals?action=filter">Отфильтровать</a>
-    <a href="meals?action=clearFilter">Отменить</a>
+        <button type="submit">Filter</button>
+
+    </form>
     <hr/>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
