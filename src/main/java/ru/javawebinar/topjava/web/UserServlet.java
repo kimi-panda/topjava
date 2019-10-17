@@ -16,12 +16,10 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userIdString = request.getParameter("userId");
-        if (userIdString != null)
-            if (!userIdString.isEmpty()) {
-                SecurityUtil.setAuthUserId(Integer.parseInt(userIdString));
-            }
+        if (userIdString != null && !userIdString.isEmpty()) {
+            SecurityUtil.setAuthUserId(Integer.parseInt(userIdString));
+        }
         response.sendRedirect("meals");
-
     }
 
     @Override

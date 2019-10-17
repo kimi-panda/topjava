@@ -40,13 +40,13 @@ public class MealRestController {
         return service.get(id, authUserId());
     }
 
-    public List<Meal> getAll() {
+    public List getAll() {
         log.info("getAll");
         return service.getAll(authUserId());
     }
 
     public List<MealTo> getFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
-        log.info("getFiltered {}", startDate, endDate, startTime, endTime);
+        log.info("getFiltered");
         List<Meal> mealList = service.getFiltered(startDate, endDate, startTime, endTime, authUserId());
         return MealsUtil.getTos(mealList, MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
@@ -57,7 +57,7 @@ public class MealRestController {
         service.update(meal, authUserId());
     }
 
-    public List<MealTo> getTos() {
+    public List getTos() {
         return MealsUtil.getTos(getAll(), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
 
