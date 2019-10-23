@@ -94,6 +94,7 @@ public class MealServiceTest {
         Meal created = service.create(newMeal, USER_ID);
         newMeal.setId(created.getId());
         assertMatch(service.getAll(USER_ID), MEAL3, MEAL2, MEAL1, newMeal);
+        assertMatch(created, newMeal);
     }
 
     @Test(expected = DataAccessException.class)
