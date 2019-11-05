@@ -134,14 +134,5 @@ public class User extends AbstractNamedEntity {
                 '}';
     }
 
-    @OneToMany(mappedBy = "user")
-    private List<Meal> meal;
 
-    public List<Meal> getMeal() {
-        return meal;
-    }
-
-    public void setMeal(List<Meal> meal) {
-        this.meal = meal;
-    }
 }
