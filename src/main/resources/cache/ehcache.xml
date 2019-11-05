@@ -20,6 +20,5 @@
         </expiry>
         <heap>1</heap>
     </cache-template>
-
     <cache alias="users" uses-template="singleNonExpiryCache"/>
 </config>
