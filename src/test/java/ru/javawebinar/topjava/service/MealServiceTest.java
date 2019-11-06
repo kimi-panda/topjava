@@ -17,14 +17,14 @@ public abstract class MealServiceTest extends ServiceTest {
     @Autowired
     private MealService service;
 
-    @Override
+    @Test
     public void delete() throws Exception {
         service.delete(MEAL1_ID, USER_ID);
         thrown.expect(NotFoundException.class);
         service.get(MEAL1_ID, USER_ID);
     }
 
-    @Override
+    @Test
     public void deleteNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.delete(1, USER_ID);
@@ -36,7 +36,7 @@ public abstract class MealServiceTest extends ServiceTest {
         service.delete(MEAL1_ID, ADMIN_ID);
     }
 
-    @Override
+    @Test
     public void create() throws Exception {
         Meal newMeal = getCreated();
         Meal created = service.create(newMeal, USER_ID);
@@ -46,13 +46,13 @@ public abstract class MealServiceTest extends ServiceTest {
         assertMatch(service.get(newId, USER_ID), newMeal);
     }
 
-    @Override
+    @Test
     public void get() throws Exception {
         Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
         assertMatch(actual, ADMIN_MEAL1);
     }
 
-    @Override
+    @Test
     public void getNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.get(MEAL1_ID, ADMIN_ID);
@@ -64,7 +64,7 @@ public abstract class MealServiceTest extends ServiceTest {
         service.get(MEAL1_ID, ADMIN_ID);
     }
 
-    @Override
+    @Test
     public void update() throws Exception {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
@@ -78,7 +78,7 @@ public abstract class MealServiceTest extends ServiceTest {
         service.update(MEAL1, ADMIN_ID);
     }
 
-    @Override
+    @Test
     public void getAll() throws Exception {
         assertMatch(service.getAll(USER_ID), MEALS);
     }

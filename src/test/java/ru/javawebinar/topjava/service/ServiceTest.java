@@ -1,8 +1,8 @@
 package ru.javawebinar.topjava.service;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
@@ -36,7 +36,6 @@ public abstract class ServiceTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Rule
-    // http://stackoverflow.com/questions/14892125/what-is-the-best-practice-to-determine-the-execution-time-of-the-bussiness-relev
     public Stopwatch stopwatch = new Stopwatch() {
         @Override
         protected void finished(long nanos, Description description) {
@@ -46,6 +45,11 @@ public abstract class ServiceTest {
         }
     };
 
+    @BeforeClass
+    public static void cleanResults() {
+        results = new StringBuilder();
+    }
+
     @AfterClass
     public static void printResult() {
         log.info("\n---------------------------------" +
@@ -54,27 +58,5 @@ public abstract class ServiceTest {
                 results +
                 "\n---------------------------------");
     }
-
-
-    @Test
-    public abstract void create() throws Exception;
-
-    @Test
-    public abstract void get() throws Exception;
-
-    @Test
-    public abstract void getNotFound() throws Exception;
-
-    @Test
-    public abstract void delete() throws Exception;
-
-    @Test
-    public abstract void deleteNotFound() throws Exception;
-
-    @Test
-    public abstract void update() throws Exception;
-
-    @Test
-    public abstract void getAll() throws Exception;
 
 }

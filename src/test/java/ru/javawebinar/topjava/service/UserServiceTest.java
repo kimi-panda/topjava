@@ -28,7 +28,7 @@ public abstract class UserServiceTest extends ServiceTest{
         cacheManager.getCache("users").clear();
     }
 
-    @Override
+    @Test
     public void create() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, new Date(), Collections.singleton(Role.ROLE_USER));
         User created = service.create(newUser);
@@ -43,26 +43,26 @@ public abstract class UserServiceTest extends ServiceTest{
         service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
-    @Override
+    @Test
     public void delete() throws Exception {
         service.delete(USER_ID);
         thrown.expect(NotFoundException.class);
         service.get(USER_ID);
     }
 
-    @Override
+    @Test
     public void deleteNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.delete(1);
     }
 
-    @Override
+    @Test
     public void get() throws Exception {
         User user = service.get(USER_ID);
         assertMatch(user, USER);
     }
 
-    @Override
+    @Test
     public void getNotFound() throws Exception {
         thrown.expect(NotFoundException.class);
         service.get(1);
@@ -74,7 +74,7 @@ public abstract class UserServiceTest extends ServiceTest{
         assertMatch(user, USER);
     }
 
-    @Override
+    @Test
     public void update() throws Exception {
         User updated = new User(USER);
         updated.setName("UpdatedName");
@@ -83,7 +83,7 @@ public abstract class UserServiceTest extends ServiceTest{
         assertMatch(service.get(USER_ID), updated);
     }
 
-    @Override
+    @Test
     public void getAll() throws Exception {
         List<User> all = service.getAll();
         assertMatch(all, ADMIN, USER);
